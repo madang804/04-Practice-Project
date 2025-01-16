@@ -10,6 +10,11 @@ jobs:
         uses: actions/setup-node@v4.1.0
         with:
           node-version: '18.19.1'
+      - name: Install dependencies
+        run: |
+          echo "Installing dependencies..."
+          npm ci
+          npm audit fix
       - name: Lint
         run: |
           echo "Linting..."
@@ -23,6 +28,11 @@ jobs:
         uses: actions/setup-node@v4.1.0
         with:
           node-version: '18.19.1'
+      - name: Install dependencies
+        run: |
+          echo "Installing dependencies..."
+          npm ci
+          npm audit fix
       - name: Test
         run: |
           echo "Testing..."
@@ -36,6 +46,11 @@ jobs:
         uses: actions/setup-node@v4.1.0
         with:
           node-version: '18.19.1'
+      - name: Install dependencies
+        run: |
+          echo "Installing dependencies..."
+          npm ci
+          npm audit fix
       - name: Build
         run: |
           echo "Building..."
