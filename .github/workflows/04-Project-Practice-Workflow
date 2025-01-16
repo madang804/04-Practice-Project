@@ -1,0 +1,43 @@
+name: 04-Project-Practice-Workflow
+on: [push, dispatch_workflow]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Nodejs Setup
+        uses: actions/setup-node@v4.1.0
+        with:
+          node-version: '18.19.1'
+      - name: Lint
+        run: |
+          echo "Linting..."
+          npm run lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Nodejs Setup
+        uses: actions/setup-node@v4.1.0
+        with:
+          node-version: '18.19.1'
+      - name: Test
+        run: |
+          echo "Testing..."
+          npm run test
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Nodejs Setup
+      - uses: actions/setup-node@v4.1.0
+        with:
+          node-version: '18.19.1'
+      - name: Build
+      steps:
+        run: |
+          echo "Building..."
+          echo "Build completed successfully!"
