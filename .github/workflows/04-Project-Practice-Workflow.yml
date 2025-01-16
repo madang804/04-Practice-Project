@@ -33,11 +33,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Nodejs Setup
-      - uses: actions/setup-node@v4.1.0
+        uses: actions/setup-node@v4.1.0
         with:
           node-version: '18.19.1'
       - name: Build
-      steps:
         run: |
           echo "Building..."
           echo "Build completed successfully!"
