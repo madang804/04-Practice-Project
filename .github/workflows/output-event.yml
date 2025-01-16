@@ -7,4 +7,4 @@ jobs:
             - name: output-event
               run: |
                 echo "Outputting event..."
-                echo "{{ toJson(github.event) }}"
+                echo "${{ toJson(github.event) }}"
