@@ -5,7 +5,7 @@ on:
       - main
     types: opened
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,21 +24,6 @@ jobs:
           echo "Linting..."
           npm run lint
           echo "Lint completed successfully!"
-  test:
-    runs-on: ubuntu-latest
-    needs: lint
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4.2.2
-      - name: Nodejs Setup
-        uses: actions/setup-node@v4.1.0
-        with:
-          node-version: '18.19.1'
-      - name: Install dependencies
-        run: |
-          echo "Installing dependencies..."
-          npm ci
-          npm audit fix
       - name: Test
         run: |
           echo "Testing..."
@@ -67,8 +52,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: build
-          path: build
+          name: dist-files
+          path: dist
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -78,10 +63,10 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4.1.8
         with:
-          name: build
-      - name: Deploy
+          name: dist-files
+      - name: Output artifact
         run: |
           echo "Deploying..."
-          apt install tree
-          tree build
+          apt install tree -y
+          tree
           echo "Deploy completed successfully!"
