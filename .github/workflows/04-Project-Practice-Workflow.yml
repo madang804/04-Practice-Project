@@ -1,5 +1,9 @@
 name: 04-Project-Practice-Workflow
-on: [workflow_dispatch]
+on: 
+  pull_request:
+    branches:
+      - main
+    types: opened
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -19,6 +23,7 @@ jobs:
         run: |
           echo "Linting..."
           npm run lint
+          echo "Lint completed successfully!"
   test:
     runs-on: ubuntu-latest
     needs: lint
@@ -38,6 +43,7 @@ jobs:
         run: |
           echo "Testing..."
           npm run test
+          echo "Test completed successfully!"
   build:
     runs-on: ubuntu-latest
     needs: test
@@ -58,3 +64,22 @@ jobs:
           echo "Building..."
           npm run build
           echo "Build completed successfully!"
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: build
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Download artifact
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: build
+      - name: Deploy
+        run: |
+          echo "Deploying..."
+          ls -l build
+          echo "Deploy completed successfully!"
