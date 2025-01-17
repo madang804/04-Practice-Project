@@ -1,5 +1,6 @@
 name: 04-Project-Practice-Workflow
-on: 
+on:
+  workflow_dispatch:
   pull_request:
     branches:
       - main
