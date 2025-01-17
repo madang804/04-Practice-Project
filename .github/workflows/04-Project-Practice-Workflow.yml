@@ -14,11 +14,14 @@ jobs:
         uses: actions/setup-node@v4.1.0
         with:
           node-version: '18.19.1'
+          cache: '~/.npm'
+          cache-dependency-path: '**/package-lock.json'
       - name: Install dependencies
         run: |
           echo "Installing dependencies..."
           npm ci
           npm audit fix
+          echo "Dependencies installed successfully!"
       - name: Lint
         run: |
           echo "Linting..."
@@ -41,11 +44,14 @@ jobs:
         uses: actions/setup-node@v4.1.0
         with:
           node-version: '18.19.1'
+          cache: '~/.npm'
+          cache-dependency-path: '**/package-lock.json'
       - name: Install dependencies
         run: |
           echo "Installing dependencies..."
           npm ci
           npm audit fix
+          echo "Dependencies installed successfully!"
       - name: Build
         run: |
           echo "Building..."
